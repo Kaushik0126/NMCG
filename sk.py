@@ -112,5 +112,5 @@ def response(user_response):
 
         print("after open")
         # text.raw = text.raw + user_response + ", " + response_parapharase.text.replace(".",",")+". "
-        return "We didn't understand that! Here are some results from Online:\n" + response_parapharase.text
+        return "I'm sorry, I couldn't find results in my trained data. Here are some results from Online:\n" + response_parapharase.text
 print(response("how to reduce water pollution"))
