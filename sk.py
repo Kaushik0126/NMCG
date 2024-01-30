@@ -100,10 +100,11 @@ def response(user_response):
     else:
         inp = user_response
         response_parapharase = model.generate_content(f"""give me the paraphrase answer {inp} in the form of text in less than 50 words.""")
-        new_string = user_response + ", " + response_parapharase.text[:-1].replace(".",",")+". "
+        new_string = raw + user_response + ", " + response_parapharase.text[:-1].replace(".",",")+". "
 
         print("before open")
-        with open("text.txt", 'a',encoding='utf-8') as file:
+        with open("text.txt", 'w+',encoding='utf-8') as file:
+            file.truncate(0);
             print("before write")
             file.write(new_string.replace("*",""))
             print(file.name)
