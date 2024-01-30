@@ -1,7 +1,7 @@
 # NMCG CHATBOT
 A Chatbot application for Ganga Cleaning Awareness Campaign.
 # Visit our webpage at: 
-     https://nmcg-chatbot.onrender.com
+https://nmcg-chatbot.onrender.com
 
 
 # Problem Statement
