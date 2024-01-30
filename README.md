@@ -36,7 +36,7 @@ the Namami Gange Programme and the importance of river conservation.
 
 # Authors
 - B.R.Sohith Kumar Reddy
-- K.Kaushik Reddy
+- K.Koushik Reddy
 - M.Sree Charan Reddy
 - P.Sreenadh Reddy
 - A.Sudheep Bhaskar
