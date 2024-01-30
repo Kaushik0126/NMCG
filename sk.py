@@ -13,6 +13,9 @@ from sklearn.metrics.pairwise import cosine_similarity
 import google.generativeai as genai
 from pymongo import MongoClient
 
+nltk.download('punkt')
+nltk.download('wordnet')
+
 GREETING_INPUTS = ('hello', 'hi', 'greetings', 'sup', 'what\'s up', 'hey',)
 SENDOFF_INPUTS = ('bye','thankyou','see you later','time to go','okay then bye')
 TIME_INPUTS = ("whats' the time", "time", " what time is it?", "what is the time?", "could you tell me the time please?", "do you have the time?")
