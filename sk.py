@@ -83,6 +83,10 @@ def response(user_response):
         date1=re.findall(r'\d\d\d\d-\d\d-\d\d',date_time)
         return date1[0]
 
+    res4 = sendoff(user_response)
+    if (res4):
+        return res4
+
     # print([sentence_tokens[:2], word_tokens[:2]])
 
     robo_response = ''
@@ -110,5 +114,5 @@ def response(user_response):
         response_parapharase = model.generate_content(f"""give the answer {inp} in the form of text in less than 50 words.""")
         y = x + "\n" + user_response + ", " + response_parapharase.text[:-1].replace(".",",")+". "
         collection.find_one_and_replace({'raw': x}, {'raw': y})
-
+        x = y
         return "We didn't understand that! Here are some results from Online:\n" + response_parapharase.text
