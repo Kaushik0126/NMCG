@@ -26,9 +26,6 @@ SENDOFF_RESPONSES = ['Take care and stay in touch!','Until we meet again, take c
 client = MongoClient("mongodb+srv://kaushikkadari321:767187@cluster0.yxjavbe.mongodb.net/")
 db = client["Nmcg"]
 collection = db.Chatbot
-my_object = collection.find_one()["raw"]
-x = my_object
-
 
 lemmer = nltk.stem.WordNetLemmatizer()
 remove_punct_dict = dict((ord(punct), None) for punct in string.punctuation)
@@ -88,7 +85,9 @@ def response(user_response):
         return res4
 
     # print([sentence_tokens[:2], word_tokens[:2]])
-
+    my_object = collection.find_one()["raw"]
+    x = my_object
+    
     robo_response = ''
     word_tokens = nltk.word_tokenize(x)
     sentence_tokens = nltk.sent_tokenize(x)
@@ -106,7 +105,7 @@ def response(user_response):
     req_tfidf = flat[-2]
     if req_tfidf == 0:
         return '{} Sorry, I don\'t understand you'.format(robo_response)
-    elif req_tfidf >0.2:
+    elif req_tfidf >0.15:
         return  robo_response + sentence_tokens[idx].replace(user_response +", " ,"")
     # .replace(user_response,"")
     else:
@@ -114,5 +113,4 @@ def response(user_response):
         response_parapharase = model.generate_content(f"""give the answer {inp} in the form of text in less than 50 words.""")
         y = x + "\n" + user_response + ", " + response_parapharase.text[:-1].replace(".",",")+". "
         collection.find_one_and_replace({'raw': x}, {'raw': y})
-        x = y
         return "We didn't understand that! Here are some results from Online:\n" + response_parapharase.text
