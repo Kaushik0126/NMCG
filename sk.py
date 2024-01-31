@@ -106,10 +106,7 @@ def response(user_response):
     if req_tfidf == 0:
         return '{} Sorry, I don\'t understand you'.format(robo_response)
     elif req_tfidf >0.175:
-        robo_response +=  sentence_tokens[idx].replace(user_response,"")
-        if user_response in robo_response:
-            n = len(user_response) + 2
-            robo_response[:] = robo_response[n + 1 : ]
+        robo_response +=  sentence_tokens[idx].replace(user_response + ", ", "")
         return robo_response
     # .replace(user_response,"")
     else:
