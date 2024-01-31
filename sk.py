@@ -107,11 +107,14 @@ def response(user_response):
         return '{} Sorry, I don\'t understand you'.format(robo_response)
     elif req_tfidf >0.175:
         robo_response +=  sentence_tokens[idx].replace(user_response,"")
-        return robo_response.replace("?", "")
+        if user_response in robo_response:
+            n = len(user_response) + 2
+            robo_response[:] = robo_response[n + 1 : ]
+        return robo_response
     # .replace(user_response,"")
     else:
         inp = user_response
         response_parapharase = model.generate_content(f"""give the answer {inp} in the form of text in less than 50 words.""")
-        y = x + "\n" + user_response + "?" + response_parapharase.text[:-1].replace(".",",")+". "
+        y = x + "\n" + user_response + ", " + response_parapharase.text[:-1].replace(".",",")+". "
         collection.find_one_and_replace({'raw': x}, {'raw': y})
         return "Sorry, I couldn't find results for that. Here are some results from Online:\n" + response_parapharase.text
