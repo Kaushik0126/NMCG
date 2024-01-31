@@ -12,6 +12,7 @@ def chatbot():
 @app.route('/webhook', methods=['POST'])
 def webhook():
     x = request.get_json()
-    user_message = x['message'] 
+    user_message = x['message']
+    user_message[:] = user_message.replace("?", "")
     output = sk.response(user_message)
     return jsonify({'response': output})
