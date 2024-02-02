@@ -20,7 +20,6 @@ the Namami Gange Programme and the importance of river conservation.
   ####  Technology Used
 - HTML
 - CSS
-- SASS
 - BOOTSTRAP 5
 - PYTHON
 - JAVASCRIPT
