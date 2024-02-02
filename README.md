@@ -25,7 +25,7 @@ the Namami Gange Programme and the importance of river conservation.
 - PYTHON
 - JAVASCRIPT
 - ADOBE ANIMATE
-- GOOGLE API'S
+- GOOGLE GEMINI API'S
  ####  Installation
 * There is no need to install this Application.You just need to follow through our Website.
 * There must be minimum requirement of operating system to access this website.
