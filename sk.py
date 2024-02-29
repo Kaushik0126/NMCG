@@ -13,8 +13,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 import google.generativeai as genai
 from pymongo import MongoClient
 
-nltk.download('punkt')
-nltk.download('wordnet')
+# nltk.download('punkt')
+# nltk.download('wordnet')
 
 GREETING_INPUTS = ('hello', 'hi', 'greetings', 'sup', 'what\'s up', 'hey',)
 SENDOFF_INPUTS = ('bye','thankyou','see you later','time to go','okay then bye')
@@ -23,9 +23,16 @@ DATE_INPUTS = ("what date is it today?", "date", "what's the date?", "do you kno
 GREETING_RESPONSES = ['hi', 'hey', 'hi there', 'hello', 'I am glad! You are talking to me','Hi! Its great to see you again.', 'Good [morning/afternoon/evening]! I hope your day is going well.','Greetings! I hope everything is going smoothly for you.']
 SENDOFF_RESPONSES = ['Take care and stay in touch!','Until we meet again, take care of yourself.','Goodbye for now, but not forever.','Farewell, but not goodbye. See you soon!']
 
-client = MongoClient("mongodb+srv://kaushikkadari321:767187@cluster0.yxjavbe.mongodb.net/")
+# client = MongoClient("mongodb+srv://chiliverysripad:Sripad1003@cluster0.hmzrnnp.mongodb.net/")
+# db = client["textdb"]
+# collection = db.nmcg
+
+# client = MongoClient("mongodb+srv://kaushik321:767187@cluster0.cbz6m0k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+uri = "mongodb://kaushik321:767187@ac-ka03deq-shard-00-00.cbz6m0k.mongodb.net:27017,ac-ka03deq-shard-00-01.cbz6m0k.mongodb.net:27017,ac-ka03deq-shard-00-02.cbz6m0k.mongodb.net:27017/?ssl=true&replicaSet=atlas-7ynvsq-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0"
+client = MongoClient(uri)
 db = client["Nmcg"]
 collection = db.Chatbot
+# collection = "hello"
 
 lemmer = nltk.stem.WordNetLemmatizer()
 remove_punct_dict = dict((ord(punct), None) for punct in string.punctuation)

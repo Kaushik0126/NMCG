@@ -143,9 +143,16 @@
 	});
 	
     //  POPUP VIDEO
-    $('.popup-video').magnificPopup({
-		type: 'iframe',
-	});
+    // $(document).ready(function() {
+	// 	$('.popup-video').magnificPopup({
+	// 		type: 'iframe',
+	// 	});
+	// 	const vid = document.getElementById('vid');
+	// 	vid.addEventListener('click', () => {
+	// 		vid.addClass('.video-btn');
+	// 		vid.addClass('.popup-video');
+	// 	})
+	// });
 	
 	
 	// WOW JS
