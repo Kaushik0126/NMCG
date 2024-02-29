@@ -23,9 +23,12 @@ DATE_INPUTS = ("what date is it today?", "date", "what's the date?", "do you kno
 GREETING_RESPONSES = ['hi', 'hey', 'hi there', 'hello', 'I am glad! You are talking to me','Hi! Its great to see you again.', 'Good [morning/afternoon/evening]! I hope your day is going well.','Greetings! I hope everything is going smoothly for you.']
 SENDOFF_RESPONSES = ['Take care and stay in touch!','Until we meet again, take care of yourself.','Goodbye for now, but not forever.','Farewell, but not goodbye. See you soon!']
 
-client = MongoClient("mongodb+srv://kaushikkadari321:767187@cluster0.yxjavbe.mongodb.net/")
-db = client["Nmcg"]
-collection = db.Chatbot
+# client = MongoClient("mongodb+srv://kaushikkadari321:767187@cluster0.yxjavbe.mongodb.net/")
+# db = client["Nmcg"]
+# collection = db.Chatbot
+client = MongoClient("mongodb+srv://chiliverysripad:Sripad1003@cluster0.hmzrnnp.mongodb.net/")
+db = client["textdb"]
+collection = db.nmcg
 
 lemmer = nltk.stem.WordNetLemmatizer()
 remove_punct_dict = dict((ord(punct), None) for punct in string.punctuation)
