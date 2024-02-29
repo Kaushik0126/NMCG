@@ -27,6 +27,7 @@ SENDOFF_RESPONSES = ['Take care and stay in touch!','Until we meet again, take c
 # db = client["textdb"]
 # collection = db.nmcg
 
+
 uri = "mongodb://kaushik321:767187@ac-ka03deq-shard-00-00.cbz6m0k.mongodb.net:27017,ac-ka03deq-shard-00-01.cbz6m0k.mongodb.net:27017,ac-ka03deq-shard-00-02.cbz6m0k.mongodb.net:27017/?ssl=true&replicaSet=atlas-7ynvsq-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0"
 client = MongoClient(uri)
 db = client["Nmcg"]
