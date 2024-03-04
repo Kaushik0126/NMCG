@@ -1,6 +1,5 @@
 from flask import Flask,render_template,redirect,url_for,flash,jsonify,request
 import sk 
-import st
 app = Flask(__name__)
 
 # def st():
