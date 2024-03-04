@@ -7,8 +7,8 @@ app = Flask(__name__)
     
 
 
-@app.route('/result',methods=['POST', 'GET'])
-# def result():
+# @app.route('/result',methods=['POST', 'GET'])
+# # def result():
 #     output = st()
 #     return render_template('index.html', name = output)
 
