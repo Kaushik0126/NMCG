@@ -29,26 +29,6 @@ def webhook():
     return jsonify({'response': output})
 
 
-@app.route('/enable_voice_input', methods=['GET','POST'])
-def enable_voice_input():
-    print("HI")
-    out = st.speech()
-    # user_message = out
-    # user_message = user_message.replace("?", "")
-    print(out)
-    output = sk.response(out)
-    print(output)
-    
-    return jsonify({'response': {
-        "input":out,
-        "output":output
-    }})
-
-@app.route('/disable_voice_input', methods=['GET','POST:'])
-def disable_voice_input():
-    # Code to stop listening for voice input
-    return jsonify({'response': "Mic disabled"})
-
 
 
 if __name__ == '__main__':
