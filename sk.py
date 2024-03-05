@@ -70,8 +70,9 @@ def greeting(sentence):
             return random.choice(GREETING_RESPONSES)
             
 def bot_info(sentence):
-        if sentence in BOTS:
-            return BOTS_RESPONSES
+        if sentence.lower() in BOTS:
+            return True
+        return False
 
 def response(user_response):
     res1 = greeting(user_response)
@@ -99,7 +100,7 @@ def response(user_response):
 
     res5 = bot_info(user_response)
     if (res5):
-        return res5
+        return BOTS_RESPONSES
 
     # print([sentence_tokens[:2], word_tokens[:2]])
     my_object = collection.find_one()["raw"]
