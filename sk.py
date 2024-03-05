@@ -23,17 +23,17 @@ DATE_INPUTS = ("what date is it today?", "date", "what's the date?", "do you kno
 GREETING_RESPONSES = ['hi', 'hey', 'hi there', 'hello', 'I am glad! You are talking to me','Hi! Its great to see you again.', 'Good [morning/afternoon/evening]! I hope your day is going well.','Greetings! I hope everything is going smoothly for you.']
 SENDOFF_RESPONSES = ['Take care and stay in touch!','Until we meet again, take care of yourself.','Goodbye for now, but not forever.','Farewell, but not goodbye. See you soon!']
 BOTS = ('Who are you?','Who are you','tell me about yourself?','tell me about yourself')
-BOTS_RESPONSES = ['I am MASCOT, a virtual assistant created by TEAM_NMCG. I'm here to help answer your questions, provide information.']
+BOTS_RESPONSES = ["I am MASCOT, a virtual assistant created by TEAM_NMCG. I'm here to help answer your questions, provide information."]
 
 client = MongoClient("mongodb+srv://chiliverysripad:Sripad1003@cluster0.hmzrnnp.mongodb.net/")
-# db = client["textdb"]
-# collection = db.nmcg
+db = client["textdb"]
+collection = db.nmcg
 
 
 # uri = "mongodb://kaushik321:767187@ac-ka03deq-shard-00-00.cbz6m0k.mongodb.net:27017,ac-ka03deq-shard-00-01.cbz6m0k.mongodb.net:27017,ac-ka03deq-shard-00-02.cbz6m0k.mongodb.net:27017/?ssl=true&replicaSet=atlas-7ynvsq-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0"
 # client = MongoClient(uri)
-db = client["Nmcg"]
-collection = db.Chatbot
+# db = client["Nmcg"]
+# collection = db.Chatbot
 # collection = "hello"
 
 lemmer = nltk.stem.WordNetLemmatizer()
@@ -68,6 +68,10 @@ def greeting(sentence):
     for word in sentence.split():
         if word.lower() in GREETING_INPUTS:
             return random.choice(GREETING_RESPONSES)
+            
+def bot_info(sentence):
+        if sentence in BOTS:
+            return BOTS_RESPONSES
 
 def response(user_response):
     res1 = greeting(user_response)
@@ -92,6 +96,10 @@ def response(user_response):
     res4 = sendoff(user_response)
     if (res4):
         return res4
+
+    res5 = bot_info(user_response)
+    if (res5):
+        return res5
 
     # print([sentence_tokens[:2], word_tokens[:2]])
     my_object = collection.find_one()["raw"]
