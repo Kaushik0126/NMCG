@@ -16,15 +16,14 @@ from pymongo import MongoClient
 nltk.download('punkt')
 nltk.download('wordnet')
 
-GREETING_INPUTS = ('hello', 'hi', 'greetings', 'sup', 'what\'s up', 'hey',)
+GREETING_INPUTS = ('hello', 'hi', 'greetings', 'sup', 'what\'s up', 'hey')
 SENDOFF_INPUTS = ('bye','thankyou','see you later','time to go','okay then bye')
 TIME_INPUTS = ("whats' the time", "time", " what time is it?", "what is the time?", "could you tell me the time please?", "do you have the time?")
 DATE_INPUTS = ("what date is it today?", "date", "what's the date?", "do you know the date?", "what date are we on today?", "what's the date today?", "what's today's date?")
 GREETING_RESPONSES = ['hi', 'hey', 'hi there', 'hello', 'I am glad! You are talking to me','Hi! Its great to see you again.', 'Good [morning/afternoon/evening]! I hope your day is going well.','Greetings! I hope everything is going smoothly for you.']
 SENDOFF_RESPONSES = ['Take care and stay in touch!','Until we meet again, take care of yourself.','Goodbye for now, but not forever.','Farewell, but not goodbye. See you soon!']
-BOTS = ('Who are you?','Who are you','tell me about yourself?','tell me about yourself')
-BOTS_RESPONSES = ["I am MASCOT, a virtual assistant created by TEAM_NMCG. I'm here to help answer your questions, provide information."]
-
+BOTS = ('who are you?', 'who are you', 'tell me about yourself?', 'tell me about yourself')
+BOTS_RESPONSES = "I am MASCOT, a virtual assistant created by TEAM_NMCG. I'm here to help answer your questions, provide information."
 client = MongoClient("mongodb+srv://chiliverysripad:Sripad1003@cluster0.hmzrnnp.mongodb.net/")
 db = client["textdb"]
 collection = db.nmcg
@@ -68,17 +67,18 @@ def greeting(sentence):
     for word in sentence.split():
         if word.lower() in GREETING_INPUTS:
             return random.choice(GREETING_RESPONSES)
-            
+        
 def bot_info(sentence):
-        if sentence.lower() in BOTS:
+        if sentence in BOTS:
             return True
         return False
 
 def response(user_response):
+
     res1 = greeting(user_response)
     if (res1):
         return  res1
-
+    
     res2 = time(user_response)
     if (res2):
         date_time=datetime.datetime.now()
@@ -88,6 +88,7 @@ def response(user_response):
 
     #What is the main objective of nmcg, 
     res3 = date(user_response)
+
     if(res3):
         date_time=datetime.datetime.now()
         date_time=str(date_time)
@@ -101,7 +102,8 @@ def response(user_response):
     res5 = bot_info(user_response)
     if (res5):
         return BOTS_RESPONSES
-
+    
+    
     # print([sentence_tokens[:2], word_tokens[:2]])
     my_object = collection.find_one()["raw"]
     x = my_object
@@ -133,3 +135,4 @@ def response(user_response):
         y = x + "\n" + user_response + ", " + response_parapharase.text[:-1].replace(".",",")+". "
         collection.find_one_and_replace({'raw': x}, {'raw': y})
         return "Sorry, I couldn't find results for that. Here are some results from Online:\n" + response_parapharase.text
+# print(response("who are you?"))
