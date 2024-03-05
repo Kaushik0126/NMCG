@@ -22,6 +22,8 @@ TIME_INPUTS = ("whats' the time", "time", " what time is it?", "what is the time
 DATE_INPUTS = ("what date is it today?", "date", "what's the date?", "do you know the date?", "what date are we on today?", "what's the date today?", "what's today's date?")
 GREETING_RESPONSES = ['hi', 'hey', 'hi there', 'hello', 'I am glad! You are talking to me','Hi! Its great to see you again.', 'Good [morning/afternoon/evening]! I hope your day is going well.','Greetings! I hope everything is going smoothly for you.']
 SENDOFF_RESPONSES = ['Take care and stay in touch!','Until we meet again, take care of yourself.','Goodbye for now, but not forever.','Farewell, but not goodbye. See you soon!']
+BOTS = ('Who are you?','Who are you','tell me about yourself?','tell me about yourself')
+BOTS_RESPONSES = ['I am MASCOT, a virtual assistant created by TEAM_NMCG. I'm here to help answer your questions, provide information.']
 
 client = MongoClient("mongodb+srv://chiliverysripad:Sripad1003@cluster0.hmzrnnp.mongodb.net/")
 # db = client["textdb"]
