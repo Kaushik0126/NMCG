@@ -107,7 +107,7 @@ def response(user_response):
     my_object = collection.find_one()["raw"]
     x = my_object
     robo_response = ''
-    
+
     word_tokens = nltk.word_tokenize(x)
     sentence_tokens = nltk.sent_tokenize(x)
     sentence_tokens.append(user_response)
@@ -123,9 +123,9 @@ def response(user_response):
     flat.sort()
     # print(flat)
     req_tfidf = flat[-2]
-    # print("TF-IDF: ", req_tfidf)
+    print("TF-IDF: ", req_tfidf)
 
-    if req_tfidf < 0.175:
+    if req_tfidf < 0.05:
         inp = user_response
         response_parapharase = model.generate_content(f"""Cosider you as a chatbot for an organization. Give the answer to {inp} in the form of text in less than 20 words.""")
         return response_parapharase.text
@@ -133,10 +133,13 @@ def response(user_response):
     elif req_tfidf > 0.175:
         data = sentence_tokens[idx].split(";;", 1)
         robo_response += data[1] if len(data) > 1 else sentence_tokens[idx]
-        return robo_response[1:]
+        print(robo_response)
+        return robo_response[1:] if robo_response[0] == ' ' else robo_response
     else:
         inp = user_response
         response_parapharase = model.generate_content(f"""give the answer {inp} in the form of text in less than 50 words.""")
+        user_response = user_response.replace("?", "")
+        # print(user_response)
         y = x + "\n" + user_response + ";; " + response_parapharase.text[:-1].replace(".",",")+". "
         collection.find_one_and_replace({'raw': x}, {'raw': y})
         return "Sorry, I couldn't find results for that. Here are some results from Online:\n" + response_parapharase.text

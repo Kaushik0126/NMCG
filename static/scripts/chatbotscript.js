@@ -1,20 +1,16 @@
 const chatbotTogglerdocument = document.querySelector(".chatbot-toggler");
 const closeBtn = document.querySelector(".close-btn");
 const chatbox = document.querySelector(".chatbox");
-const chatInput = document.querySelector(".chat-input textarea");
 const sendChatBtn = document.querySelector(".chat-input span");
 const showImg = document.querySelector('.chacha-animation');
-// const mic=document.getElementById("mic_on_off");
+const chatInput = document.querySelector(".chat-input textarea");
 
 let userMessage = null; // Variable to store user's message
-const API_KEY = ""; // Paste your API key here
 const inputInitHeight = chatInput.scrollHeight;
 let sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 // Get references to the voice input button and the chat input textarea
 const voiceInputBtn = document.getElementById("voice-input-btn");
-
-// const chatInput = document.querySelector(".chat-input textarea");
 
 // Function to handle voice input
 const handleVoiceInput = () => {
@@ -67,26 +63,8 @@ const handleVoiceInput = () => {
     }
 };
 
-// Initialize voice input handling
-// handleVoiceInput();
-
-// function toggleVoice(params) {
-    
-//     if (voiceInputBtn.classList.contains('muted')) {
-//         // Unmute action
-//         voiceInputBtn.classList.remove('muted');
-//         voiceInputBtn.innerHTML = "mic";
-//     }
-//     else{
-//         voiceInputBtn.classList.add('muted');
-//         voiceInputBtn.innerHTML="micoff";
-        
-//     }
-// }
 // Event listener for voice input button
 voiceInputBtn.addEventListener("click", handleVoiceInput);
-
-// Initialize microphone button state
 
 const createChatLi = (message, className) => {
     // Create a chat <li> element with passed message and className
@@ -128,10 +106,6 @@ const generateResponse = (chatElement) => {
 
     sendPostRequest(userMessage)
 }
-
-
-
-
 
 const handleChat = () => {
     userMessage = chatInput.value.trim(); // Get user entered message and remove extra whitespace
@@ -233,74 +207,3 @@ function getRandomQuote() {
     return "\" " + quotes[randomIndex] + " \"";
 }
 document.getElementById("quote").innerHTML = getRandomQuote();
-
-// function sendPostRequest(userMessage) {
-//     const url = "/webhook";
-//     const data = JSON.stringify({ message: userMessage });
-
-//     fetch(url, {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json",
-//         },
-//         body: data,
-//     })
-//         .then((response) => response.json())
-//         .then((data) => {
-//             let botResponse = data.response;
-//             messageElement.textContent = botResponse
-//             // Append bot's response to the chatbox
-//             // const chatMessages = document.getElementById("chat-widget-messages");
-//             // chatMessages.innerHTML += `<div><strong>Bot: </strong>${botResponse}</div>`;
-//         })
-//         .catch((error) => {
-//             messageElement.classList.add("error");
-//             messageElement.textContent = "Oops! Something went wrong. Please try again.";
-//         }).finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
-// }
-// function toggleVoice() {
-//     var voiceInputBtn = document.getElementById('speak-btn');
-//     if (voiceInputBtn.classList.contains('muted')) {
-//         // Unmute action
-//         voiceInputBtn.classList.remove('muted');
-//         voiceInputBtn.innerHTML = "mic";
-//         fetch('/enable_voice_input');
-//         // Call Flask route to enable voice input
-//         const result = fetch('/enable_voice_input');
-//         console.log(result)
-//         let s = "tell me about nmcg";
-//         chatbox.appendChild(createChatLi(s, "outgoing"));
-//         chatbox.scrollTo(0, chatbox.scrollHeight);
-//         fetch('/enable_voice_input')
-//             .then(response => response.json()) // Parse the JSON response
-//             .then(data => {
-//                 console.log(data); // Log the response data
-//                 sendPostRequest(data.response); // Call sendPostRequest with the response data
-//             })
-//             .catch(error => {
-//                 console.error('Error:', error);
-//                 // Handle errors here
-//             });
-
-
-//         // sendPostRequest(result.response);
-
-//     } else {
-//         // Mute action
-//         voiceInputBtn.classList.add('muted');
-//         voiceInputBtn.innerHTML = "mic_off"
-//         // Call Flask route to disable voice input
-//         fetch('/disable_voice_input');
-//         // let s="tell me about nmcg"
-
-//         // setTimeout(async() => {
-//         //     // Display "Thinking..." message while waiting for the response
-//         //     const incomingChatLi = createChatLi("Thinking...", "incoming");
-//         //     chatbox.appendChild(incomingChatLi);
-//         //     await sleep(1200);
-//         //     chatbox.scrollTo(0, chatbox.scrollHeight);
-//         //     generateResponse(incomingChatLi);
-//         // }, 600);
-//     }
-// }
-
