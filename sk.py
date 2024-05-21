@@ -24,16 +24,15 @@ GREETING_RESPONSES = ['hi', 'hey', 'hi there', 'hello', 'I am glad! You are talk
 SENDOFF_RESPONSES = ['Take care and stay in touch!','Until we meet again, take care of yourself.','Goodbye for now, but not forever.','Farewell, but not goodbye. See you soon!']
 BOTS = ('who are you?', 'who are you', 'tell me about yourself?', 'tell me about yourself')
 BOTS_RESPONSES = "I am MASCOT, a virtual assistant created by TEAM_NMCG. I'm here to help answer your questions, provide information."
-client = MongoClient("mongodb+srv://chiliverysripad:Sripad1003@cluster0.hmzrnnp.mongodb.net/")
-db = client["textdb"]
-collection = db.nmcg
+# client = MongoClient("mongodb+srv://chiliverysripad:Sripad1003@cluster0.hmzrnnp.mongodb.net/")
+# db = client["textdb"]
+# collection = db.nmcg
 
 
-# uri = "mongodb://kaushik321:767187@ac-ka03deq-shard-00-00.cbz6m0k.mongodb.net:27017,ac-ka03deq-shard-00-01.cbz6m0k.mongodb.net:27017,ac-ka03deq-shard-00-02.cbz6m0k.mongodb.net:27017/?ssl=true&replicaSet=atlas-7ynvsq-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0"
-# client = MongoClient(uri)
-# db = client["Nmcg"]
-# collection = db.Chatbot
-# collection = "hello"
+uri = "mongodb://kaushik321:767187@ac-ka03deq-shard-00-00.cbz6m0k.mongodb.net:27017,ac-ka03deq-shard-00-01.cbz6m0k.mongodb.net:27017,ac-ka03deq-shard-00-02.cbz6m0k.mongodb.net:27017/?ssl=true&replicaSet=atlas-7ynvsq-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0"
+client = MongoClient(uri)
+db = client["Nmcg"]
+collection = db.Chatbot
 
 lemmer = nltk.stem.WordNetLemmatizer()
 remove_punct_dict = dict((ord(punct), None) for punct in string.punctuation)
@@ -126,13 +125,16 @@ def response(user_response):
     if req_tfidf == 0:
         return '{} Sorry, I don\'t understand you'.format(robo_response)
     elif req_tfidf >0.175:
-        robo_response +=  sentence_tokens[idx].replace(user_response + ", ", "")
-        return robo_response
+        data = sentence_tokens[idx].split(";;", 1)
+        robo_response += data[1] if len(data) > 1 else sentence_tokens[idx]
+        # robo_response +=  sentence_tokens[idx].replace(user_response + ", ", "")
+        # robo_response.replace(";","")
+        return robo_response[1:]
     # .replace(user_response,"")
     else:
         inp = user_response
         response_parapharase = model.generate_content(f"""give the answer {inp} in the form of text in less than 50 words.""")
-        y = x + "\n" + user_response + ", " + response_parapharase.text[:-1].replace(".",",")+". "
+        y = x + "\n" + user_response + ";; " + response_parapharase.text[:-1].replace(".",",")+". "
         collection.find_one_and_replace({'raw': x}, {'raw': y})
         return "Sorry, I couldn't find results for that. Here are some results from Online:\n" + response_parapharase.text
 # print(response("who are you?"))
