@@ -37,7 +37,7 @@ collection = db.Chatbot
 lemmer = nltk.stem.WordNetLemmatizer()
 remove_punct_dict = dict((ord(punct), None) for punct in string.punctuation)
 
-GOOGLE_API_KEY="AIzaSyDA4x_vwtDPTVH0V_gcKAQeViMLVjy-D70"
+GOOGLE_API_KEY="AIzaSyCS_57bvmSnRKCu_GUeIsNINQuOh38N2Z8"
 genai.configure(api_key=GOOGLE_API_KEY)
 
 model = genai.GenerativeModel('gemini-pro')
@@ -106,14 +106,15 @@ def response(user_response):
     # print([sentence_tokens[:2], word_tokens[:2]])
     my_object = collection.find_one()["raw"]
     x = my_object
-    
     robo_response = ''
+    
     word_tokens = nltk.word_tokenize(x)
     sentence_tokens = nltk.sent_tokenize(x)
     sentence_tokens.append(user_response)
     vectorizer = TfidfVectorizer(tokenizer=lem_normalize, stop_words='english')
     tfidf = vectorizer.fit_transform(sentence_tokens)
     values = cosine_similarity(tfidf[-1], tfidf)
+
     # print(values)
     idx = values.argsort()[0][-2]
     # print(idx)
@@ -122,19 +123,20 @@ def response(user_response):
     flat.sort()
     # print(flat)
     req_tfidf = flat[-2]
-    if req_tfidf == 0:
-        return '{} Sorry, I don\'t understand you'.format(robo_response)
-    elif req_tfidf >0.175:
+    # print("TF-IDF: ", req_tfidf)
+
+    if req_tfidf < 0.175:
+        inp = user_response
+        response_parapharase = model.generate_content(f"""Cosider you as a chatbot for an organization. Give the answer to {inp} in the form of text in less than 20 words.""")
+        return response_parapharase.text
+        # return '{} Sorry, I don\'t understand you'.format(robo_response)
+    elif req_tfidf > 0.175:
         data = sentence_tokens[idx].split(";;", 1)
         robo_response += data[1] if len(data) > 1 else sentence_tokens[idx]
-        # robo_response +=  sentence_tokens[idx].replace(user_response + ", ", "")
-        # robo_response.replace(";","")
         return robo_response[1:]
-    # .replace(user_response,"")
     else:
         inp = user_response
         response_parapharase = model.generate_content(f"""give the answer {inp} in the form of text in less than 50 words.""")
         y = x + "\n" + user_response + ";; " + response_parapharase.text[:-1].replace(".",",")+". "
         collection.find_one_and_replace({'raw': x}, {'raw': y})
         return "Sorry, I couldn't find results for that. Here are some results from Online:\n" + response_parapharase.text
-# print(response("who are you?"))
