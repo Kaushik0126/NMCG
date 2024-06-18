@@ -31,7 +31,7 @@ The application will be deployed at the entrance of the River Basin War Room & G
 
 1. **Clone the repository**:
     ```sh
-    git clone https://github.com/Kaushik0126/NMCG
+    git clone https://github.com/Kaushik0126/NMCG.git
     cd NMCG
     ```
 
