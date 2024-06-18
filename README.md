@@ -31,7 +31,7 @@ The application will be deployed at the entrance of the River Basin War Room & G
 
 1. **Clone the repository**:
     ```sh
-    git clone <repository-url>
+    git clone https://github.com/Kaushik0126/NMCG
     cd NMCG-main
     ```
 
@@ -61,7 +61,7 @@ After starting the Flask server, navigate to `http://127.0.0.1:5000` in your web
 
 ## Live Demo
 
-Check out the live demo of the application [here](#).
+Check out the live demo of the application [here](https://nmcg-chatbot.onrender.com/chatbot).
 
 ## Screenshots
 
